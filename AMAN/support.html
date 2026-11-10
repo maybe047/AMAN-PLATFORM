@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMAN | Phishing Awareness</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body[dir="rtl"] {
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="desktop-container">
+    
+    <!-- Top Navigation -->
+    <header style="background-color: #F7EBEF; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 0 0 15px 15px;">
+      <ul class="nav-links" style="list-style: none; display: flex; gap: 15px; margin: 0; padding: 0; align-items: center;">
+        <li><a href="index.html" class="nav-home" style="text-decoration: none; color: #333; font-size: 14px;">Home</a></li>
+        <li><a href="safety.html" class="nav-safety" style="text-decoration: none; color: #333; font-size: 14px;">Safety Center</a></li>
+        <li><a href="checker.html" class="nav-checker" style="text-decoration: none; color: #333; font-size: 14px;">Line Checker</a></li>
+        <li><a href="quiz.html" class="nav-quiz" style="text-decoration: none; color: #333; font-size: 14px;">Quiz</a></li>
+        <li><a href="about.html" class="nav-about" style="text-decoration: none; color: #333; font-size: 14px;">About</a></li>
+        <li><span id="lang-btn" class="lang-switch" style="background: #D9536E; color: white; padding: 3px 8px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold;">AR | EN</span></li>
+      </ul>
+      <div class="logo" style="font-weight: bold; font-size: 20px; color: #2C1E3B;">AMAN</div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1 id="hero-title">Phishing Awareness</h1>
+      <p id="hero-desc">Learn how to spot and avoid digital scams and fraudulent messages.</p>
+    </section>
+
+    <!-- Main Content Box -->
+    <div style="background-color: white; border-radius: 16px; padding: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 50px;">
+      <h2 id="box-title" style="color: var(--purple-dark); margin-bottom: 15px;">What Is Phishing?</h2>
+      <p id="box-desc1" style="color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">Phishing is a deceptive tactic where cybercriminals pose as trusted entities (like banks, streaming services, or delivery companies) to steal your sensitive data, passwords, or financial details.</p>
+      <p id="box-desc2" style="color: var(--text-muted); line-height: 1.6;">Recognizing warning signs is your primary defense against falling victim to fraudulent links.</p>
+    </div>
+
+    <!-- Tips Section -->
+    <div style="background-color: var(--purple-card); border-radius: 16px; padding: 35px; margin-bottom: 50px;">
+      <h2 id="tips-title" style="color: var(--purple-dark); margin-bottom: 20px;">Common Signs of Phishing</h2>
+      <ul style="color: var(--text-muted); line-height: 1.8; padding-left: 20px;">
+        <li id="tip-1">Urgent or threatening language pushing you to act immediately (e.g., "Account suspended!").</li>
+        <li id="tip-2">Misspelled domain names or suspicious URLs that don't match official websites.</li>
+        <li id="tip-3">Unexpected attachments or unexpected requests for personal login details and OTPs.</li>
+      </ul>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div style="text-align: center; color: white;">
+        <h2 style="font-size: 24px; margin-bottom: 5px;">AMAN</h2>
+        <p id="footer-rights" style="font-size: 13px; color: #D3C2CF; margin-bottom: 15px;">.AMAN. All Rights Reserved 2026 ©️</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- سكربت الترجمة الثابت والمربوط بذاكرة المتصفح -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const langBtn = document.getElementById("lang-btn");
+      const htmlRoot = document.getElementById("html-root");
+
+      // قراءة اللغة المخزنة في المتصفح تلقائياً
+      let currentLang = localStorage.getItem("aman_lang") || "en";
+
+      function applyLanguage(lang) {
+        if (lang === "ar") {
+          htmlRoot.setAttribute("dir", "rtl");
+          if(langBtn) langBtn.innerText = "EN | AR";
+
+          document.querySelector(".nav-home").innerText = "الرئيسية";
+          document.querySelector(".nav-safety").innerText = "مركز الأمان";
+          document.querySelector(".nav-checker").innerText = "فحص الروابط";
+          document.querySelector(".nav-quiz").innerText = "الاختبار";
+          document.querySelector(".nav-about").innerText = "من نحن";
+
+          document.getElementById("hero-title").innerText = "التوعية بالتصيد الاحتيالي";
+          document.getElementById("hero-desc").innerText = "تعلم كيف تكتشف وتتجنب الاحتيال الرقمي والرسائل المزيفة.";
+
+          document.getElementById("box-title").innerText = "ما هو التصيد الاحتيالي؟";
+          document.getElementById("box-desc1").innerText = "التصيد الاحتيالي هو خدعة يتقمص فيها المجترقون شخصيات جهات موثوقة (مثل البنوك، شركات البث، أو شركات التوصيل) لسرقة بياناتك الحساسة، كلمات المرور، أو تفاصيلك المالية.";
+          document.getElementById("box-desc2").innerText = "معرفة العلامات التحذيرية هي دفاعك الأساسي لتجنب الوقوع ضحية للروابط الاحتيالية.";
+
+          document.getElementById("tips-title").innerText = "علامات شائعة للتصيد الاحتيالي";
+          document.getElementById("tip-1").innerText = "لغة عاجلة أو تهديدية تدفعك للتصرف فوراً (مثل: 'تم تعليق حسابك!').";
+          document.getElementById("tip-2").innerText = "أسماء نطاقات مكتوبة بشكل خاطئ أو روابط مشبوهة لا تتطابق مع المواقع الرسمية.";
+          document.getElementById("tip-3").innerText = "مرفقات غير متوقعة أو طلبات مفاجئة لتفاصيل تسجيل الدخول الشخصية ورموز التحقق (OTP).";
+
+          document.getElementById("footer-rights").innerText = "جميع الحقوق محفوظة .AMAN. 2026 ©";
+
+        } else {
+          htmlRoot.setAttribute("dir", "ltr");
+          if(langBtn) langBtn.innerText = "AR | EN";
+
+          document.querySelector(".nav-home").innerText = "Home";
+          document.querySelector(".nav-safety").innerText = "Safety Center";
+          document.querySelector(".nav-checker").innerText = "Line Checker";
+          document.querySelector(".nav-quiz").innerText = "Quiz";
+          document.querySelector(".nav-about").innerText = "About";
+
+          document.getElementById("hero-title").innerText = "Phishing Awareness";
+          document.getElementById("hero-desc").innerText = "Learn how to spot and avoid digital scams and fraudulent messages.";
+
+          document.getElementById("box-title").innerText = "What Is Phishing?";
+          document.getElementById("box-desc1").innerText = "Phishing is a deceptive tactic where cybercriminals pose as trusted entities (like banks, streaming services, or delivery companies) to steal your sensitive data, passwords, or financial details.";
+          document.getElementById("box-desc2").innerText = "Recognizing warning signs is your primary defense against falling victim to fraudulent links.";
+
+          document.getElementById("tips-title").innerText = "Common Signs of Phishing";
+          document.getElementById("tip-1").innerText = "Urgent or threatening language pushing you to act immediately (e.g., 'Account suspended!').";
+          document.getElementById("tip-2").innerText = "Misspelled domain names or suspicious URLs that don't match official websites.";
+          document.getElementById("tip-3").innerText = "Unexpected attachments or unexpected requests for personal login details and OTPs.";
+
+          document.getElementById("footer-rights").innerText = ".AMAN. All Rights Reserved 2026 ©️";
+        }
+      }
+
+      // تطبيق اللغة فور فتح الصفحة
+      applyLanguage(currentLang);
+
+      // عند الضغط على زر التغيير
+      if(langBtn) {
+        langBtn.addEventListener("click", function () {
+          currentLang = (currentLang === "en") ? "ar" : "en";
+          localStorage.setItem("aman_lang", currentLang);
+          applyLanguage(currentLang);
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

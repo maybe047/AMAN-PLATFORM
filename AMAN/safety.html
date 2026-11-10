@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMAN | Safety Center</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body[dir="rtl"] {
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="desktop-container">
+    
+   <!-- Top Navigation -->
+   <header style="background-color: #F7EBEF; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 0 0 15px 15px;">
+     <ul class="nav-links" style="list-style: none; display: flex; gap: 15px; margin: 0; padding: 0; align-items: center;">
+       <li><a href="index.html" class="nav-home" style="text-decoration: none; color: #333; font-size: 14px;">Home</a></li>
+       <li><a href="safety.html" class="nav-safety" style="text-decoration: none; color: #333; font-size: 14px; font-weight: bold;">Safety Center</a></li>
+       <li><a href="checker.html" class="nav-checker" style="text-decoration: none; color: #333; font-size: 14px;">Line Checker</a></li>
+       <li><a href="quiz.html" class="nav-quiz" style="text-decoration: none; color: #333; font-size: 14px;">Quiz</a></li>
+       <li><a href="about.html" class="nav-about" style="text-decoration: none; color: #333; font-size: 14px;">About</a></li>
+       <li><span id="lang-btn" class="lang-switch" style="background: #D9536E; color: white; padding: 3px 8px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold;">AR | EN</span></li>
+     </ul>
+     <div class="logo" style="font-weight: bold; font-size: 20px; color: #2C1E3B;">AMAN</div>
+   </header>
+
+    <!-- Safety Center Hero -->
+    <section class="hero">
+      <h1 id="hero-title">Safety Center</h1>
+      <p id="hero-desc">Your guide to staying safe online</p>
+    </section>
+
+    <!-- Main Banner Box -->
+    <div style="background-color: var(--purple-card); border-radius: 16px; padding: 35px; text-align: center; margin-bottom: 50px;">
+      <h2 id="banner-h2" style="color: var(--purple-dark); font-size: 24px; margin-bottom: 10px;">Your Digital Safety Matters</h2>
+      <p id="banner-p" style="color: var(--text-muted); font-size: 15px; margin-bottom: 20px;">Learn how to protect your accounts, privacy and identity.</p>
+      <span id="explore-span" style="color: var(--btn-purple); font-weight: 700; cursor: pointer; font-size: 14px;">[ Explore Topics ]</span>
+    </div>
+
+    <!-- Explore Safety Topics Title -->
+    <div class="section-title" style="margin-bottom: 25px;">
+      <h2 id="topics-title">Explore Safety Topics</h2>
+    </div>
+
+    <!-- 4 Grid Cards -->
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 50px;">
+      
+      <!-- 1. Online Privacy -->
+      <a href="privacy.html" style="text-decoration: none; color: inherit;">
+        <div class="card pink" style="text-align: left; padding: 25px; display: flex; align-items: center; justify-content: space-between; height: 100%;">
+          <div>
+            <h3 class="c1-title" style="color: var(--purple-dark); font-size: 18px; margin-bottom: 5px;">Online Privacy</h3>
+            <p class="c1-sub" style="color: var(--btn-purple); font-size: 13px; font-weight: 600;">→ Learn More</p>
+          </div>
+          <div class="card-icon" style="margin: 0;">👁️</div>
+        </div>
+      </a>
+
+      <!-- 2. Account Security -->
+      <a href="security.html" style="text-decoration: none; color: inherit;">
+        <div class="card pink" style="text-align: left; padding: 25px; display: flex; align-items: center; justify-content: space-between; height: 100%;">
+          <div>
+            <h3 class="c2-title" style="color: var(--purple-dark); font-size: 18px; margin-bottom: 5px;">Account Security</h3>
+            <p class="c2-sub" style="color: var(--btn-purple); font-size: 13px; font-weight: 600;">→ Learn More</p>
+          </div>
+          <div class="card-icon" style="margin: 0;">🔒</div>
+        </div>
+      </a>
+
+      <!-- 3. Phishing Awareness -->
+      <a href="phishing.html" style="text-decoration: none; color: inherit;">
+        <div class="card pink" style="text-align: left; padding: 25px; display: flex; align-items: center; justify-content: space-between; height: 100%;">
+          <div>
+            <h3 class="c3-title" style="color: var(--purple-dark); font-size: 18px; margin-bottom: 5px;">Phishing Awareness</h3>
+            <p class="c3-sub" style="color: var(--btn-purple); font-size: 13px; font-weight: 600;">→ Learn More</p>
+          </div>
+          <div class="card-icon" style="margin: 0;">🎣</div>
+        </div>
+      </a>
+
+      <!-- 4. Password Safety -->
+      <a href="password.html" style="text-decoration: none; color: inherit;">
+        <div class="card pink" style="text-align: left; padding: 25px; display: flex; align-items: center; justify-content: space-between; height: 100%;">
+          <div>
+            <h3 class="c4-title" style="color: var(--purple-dark); font-size: 18px; margin-bottom: 5px;">Password Safety</h3>
+            <p class="c4-sub" style="color: var(--btn-purple); font-size: 13px; font-weight: 600;">→ Learn More</p>
+          </div>
+          <div class="card-icon" style="margin: 0;">🔑</div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Essential Safety Topics Section -->
+    <div class="section-title" style="margin-bottom: 25px;">
+      <h2 id="essential-title">Essential Safety Topics</h2>
+    </div>
+
+    <div style="background-color: white; border-radius: 16px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 50px;">
+      <div class="item-1" style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #F5EBF3; font-weight: 600; color: var(--purple-dark);">
+        <span>Use strong passwords</span>
+        <span>⌄</span>
+      </div>
+      <div class="item-2" style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #F5EBF3; font-weight: 600; color: var(--purple-dark);">
+        <span>Never share your OTP</span>
+        <span>⌄</span>
+      </div>
+      <div class="item-3" style="display: flex; justify-content: space-between; padding: 15px 0; font-weight: 600; color: var(--purple-dark);">
+        <span>Avoid suspicious links</span>
+        <span>⌄</span>
+      </div>
+    </div>
+
+    <!-- Bottom Banner -->
+    <div style="background-color: var(--purple-card); border-radius: 16px; padding: 35px; text-align: center; margin-bottom: 50px;">
+      <h2 id="btm-title" style="color: var(--purple-dark); font-size: 24px; margin-bottom: 5px;">Stay Safe , Stay Smart !</h2>
+      <p id="btm-desc" style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">Make smart choices in the digital world.</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div style="text-align: center; color: white;">
+        <h2 style="font-size: 24px; margin-bottom: 5px;">AMAN</h2>
+        <p id="footer-rights" style="font-size: 13px; color: #D3C2CF; margin-bottom: 15px;">.AMAN. All Rights Reserved 2026 ©️</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const langBtn = document.getElementById("lang-btn");
+      const htmlRoot = document.getElementById("html-root");
+
+      // قراءة الذاكرة تماماً مثل الهوم
+      let currentLang = localStorage.getItem("aman_lang") || "en";
+
+      function applyLanguage(lang) {
+        if (lang === "ar") {
+          htmlRoot.setAttribute("dir", "rtl");
+          if(langBtn) langBtn.innerText = "EN | AR";
+
+          document.querySelector(".nav-home").innerText = "الرئيسية";
+          document.querySelector(".nav-safety").innerText = "مركز الأمان";
+          document.querySelector(".nav-checker").innerText = "فحص الروابط";
+          document.querySelector(".nav-quiz").innerText = "الاختبار";
+          document.querySelector(".nav-about").innerText = "من نحن";
+
+          document.getElementById("hero-title").innerText = "مركز الأمان";
+          document.getElementById("hero-desc").innerText = "دليلك للبقاء آمناً على الإنترنت";
+
+          document.getElementById("banner-h2").innerText = "أمانك الرقمي يهمنا";
+          document.getElementById("banner-p").innerText = "تعلم كيف تحمي حساباتك، خصوصيتك وهويتك.";
+          document.getElementById("explore-span").innerText = "[ استكشف المواضيع ]";
+
+          document.getElementById("topics-title").innerText = "استكشف مواضيع الأمان";
+
+          document.querySelector(".c1-title").innerText = "الخصوصية عبر الإنترنت";
+          document.querySelector(".c1-sub").innerText = "→ اعلم المزيد";
+
+          document.querySelector(".c2-title").innerText = "أمان الحسابات";
+          document.querySelector(".c2-sub").innerText = "→ اعلم المزيد";
+
+          document.querySelector(".c3-title").innerText = "التوعية بالتصيد الاحتيالي";
+          document.querySelector(".c3-sub").innerText = "→ اعلم المزيد";
+
+          document.querySelector(".c4-title").innerText = "سلامة كلمات المرور";
+          document.querySelector(".c4-sub").innerText = "→ اعلم المزيد";
+
+          document.getElementById("essential-title").innerText = "مواضيع الأمان الأساسية";
+
+          document.querySelector(".item-1 span:first-child").innerText = "استخدم كلمات مرور قوية";
+          document.querySelector(".item-2 span:first-child").innerText = "لا تشارك رمز التحقق (OTP) أبداً";
+          document.querySelector(".item-3 span:first-child").innerText = "تجنب الروابط المشبوهة";
+
+          document.getElementById("btm-title").innerText = "ابقَ آمناً، ابقَ ذكياً!";
+          document.getElementById("btm-desc").innerText = "اتخذ خيارات ذكية في العالم الرقمي.";
+
+          document.getElementById("footer-rights").innerText = "جميع الحقوق محفوظة .AMAN. 2026 ©️";
+
+        } else {
+          htmlRoot.setAttribute("dir", "ltr");
+          if(langBtn) langBtn.innerText = "AR | EN";
+
+          document.querySelector(".nav-home").innerText = "Home";
+          document.querySelector(".nav-safety").innerText = "Safety Center";
+          document.querySelector(".nav-checker").innerText = "Line Checker";
+          document.querySelector(".nav-quiz").innerText = "Quiz";
+          document.querySelector(".nav-about").innerText = "About";
+
+          document.getElementById("hero-title").innerText = "Safety Center";
+          document.getElementById("hero-desc").innerText = "Your guide to staying safe online";
+
+          document.getElementById("banner-h2").innerText = "Your Digital Safety Matters";
+          document.getElementById("banner-p").innerText = "Learn how to protect your accounts, privacy and identity.";
+          document.getElementById("explore-span").innerText = "[ Explore Topics ]";
+
+          document.getElementById("topics-title").innerText = "Explore Safety Topics";
+
+          document.querySelector(".c1-title").innerText = "Online Privacy";
+          document.querySelector(".c1-sub").innerText = "→ Learn More";
+
+          document.querySelector(".c2-title").innerText = "Account Security";
+          document.querySelector(".c2-sub").innerText = "→ Learn More";
+
+          document.querySelector(".c3-title").innerText = "Phishing Awareness";
+          document.querySelector(".c3-sub").innerText = "→ Learn More";
+
+          document.querySelector(".c4-title").innerText = "Password Safety";
+          document.querySelector(".c4-sub").innerText = "→ Learn More";
+
+          document.getElementById("essential-title").innerText = "Essential Safety Topics";
+
+          document.querySelector(".item-1 span:first-child").innerText = "Use strong passwords";
+          document.querySelector(".item-2 span:first-child").innerText = "Never share your OTP";
+          document.querySelector(".item-3 span:first-child").innerText = "Avoid suspicious links";
+
+          document.getElementById("btm-title").innerText = "Stay Safe , Stay Smart !";
+          document.getElementById("btm-desc").innerText = "Make smart choices in the digital world.";
+
+          document.getElementById("footer-rights").innerText = ".AMAN. All Rights Reserved 2026 ©️";
+        }
+      }
+
+      // تطبيق اللغة فور فتح الصفحة بالاعتماد على الذاكرة
+      applyLanguage(currentLang);
+
+      // عند الضغط على زر التغيير
+      if(langBtn) {
+        langBtn.addEventListener("click", function () {
+          currentLang = (currentLang === "en") ? "ar" : "en";
+          localStorage.setItem("aman_lang", currentLang);
+          applyLanguage(currentLang);
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMAN | Cyber Library</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body[dir="rtl"] {
+      text-align: right;
+    }
+    body[dir="rtl"] .section-title {
+      text-align: right;
+    }
+    body[dir="rtl"] .search-input {
+      padding: 12px 45px 12px 18px;
+    }
+    body[dir="rtl"] .search-icon {
+      left: auto;
+      right: 18px;
+    }
+
+    /* تنسيقات مخصصة لتتطابق مع تصميم الهوم بدقة */
+    .library-intro-box {
+      background-color: #EFE3ED;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .library-intro-box h2 {
+      font-size: 18px;
+      color: #2C1E3B;
+      margin: 0 0 5px 0;
+      font-weight: bold;
+    }
+    .library-intro-box p {
+      font-size: 14px;
+      color: #665C71;
+      margin: 0;
+    }
+    .search-box-wrap {
+      position: relative;
+      margin-bottom: 30px;
+    }
+    .search-input {
+      width: 100%;
+      padding: 14px 18px 14px 45px;
+      border-radius: 12px;
+      border: 1px solid #E0D0DC;
+      background-color: white;
+      font-size: 14px;
+      color: #333;
+      box-sizing: border-box;
+      outline: none;
+    }
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #A695A2;
+      font-size: 14px;
+      pointer-events: none;
+    }
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+    .article-card {
+      background-color: #F8EDF2;
+      border-radius: 16px;
+      padding: 25px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #F3EAF0;
+      transition: transform 0.2s;
+    }
+    .article-card:hover {
+      transform: translateY(-2px);
+    }
+    .article-icon {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+    .article-title {
+      font-size: 15px;
+      font-weight: bold;
+      color: #2C1E3B;
+      margin: 0 0 15px 0;
+    }
+    .read-more {
+      font-size: 13px;
+      color: #D9536E;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .read-more:hover {
+      color: #6C3082;
+    }
+  </style>
+</head>
+<body id="body-content">
+
+  <div class="desktop-container">
+    
+    <!-- Top Navigation -->
+    <header style="background-color: #F7EBEF; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 0 0 15px 15px;">
+      <ul class="nav-links" style="list-style: none; display: flex; gap: 15px; margin: 0; padding: 0; align-items: center;">
+        <li><a href="index.html" class="nav-home" style="text-decoration: none; color: #333; font-size: 14px;">Home</a></li>
+        <li><a href="safety.html" class="nav-safety" style="text-decoration: none; color: #333; font-size: 14px;">Safety Center</a></li>
+        <li><a href="checker.html" class="nav-checker" style="text-decoration: none; color: #333; font-size: 14px;">Line Checker</a></li>
+        <li><a href="quiz.html" class="nav-quiz" style="text-decoration: none; color: #333; font-size: 14px;">Quiz</a></li>
+        <li><a href="about.html" class="nav-about" style="text-decoration: none; color: #333; font-size: 14px;">About</a></li>
+        <li><span id="lang-btn" class="lang-switch" style="background: #D9536E; color: white; padding: 3px 8px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold;">AR | EN</span></li>
+      </ul>
+      <div class="logo" style="font-weight: bold; font-size: 20px; color: #2C1E3B;">AMAN</div>
+    </header>
+
+    <!-- Hero Section (نفس هيرو الهوم بالضبط لكن بعنوان المكتبة) -->
+    <section class="hero" style="text-align: center; margin-bottom: 30px;">
+      <div style="font-size: 32px; margin-bottom: 10px;">📚</div>
+      <h1 id="page-title" style="margin: 0 0 5px 0; color: var(--purple-dark, #2C1E3B);">Cyber Library</h1>
+      <p id="page-subtitle" style="color: var(--text-muted, #665C71); margin: 0;">.Explore. Learn. Stay Protected</p>
+    </section>
+
+    <!-- كارد المعرفة حمايتك -->
+    <div class="library-intro-box">
+      <h2 id="intro-title">Knowledge Is Your Protection</h2>
+      <p id="intro-desc">Discover useful articles and guides about digital safety.</p>
+    </div>
+
+    <!-- شريط البحث -->
+    <div class="search-box-wrap">
+      <input type="text" id="search-input" class="search-input" placeholder="...Search articles">
+      <span class="search-icon">🔍</span>
+    </div>
+
+    <!-- Why Choose AMAN / Section Title style -->
+    <section class="section-title" style="margin-bottom: 20px;">
+      <h2 id="explore-title" style="font-size: 20px; color: var(--purple-dark, #2C1E3B); margin: 0;">Explore Articles</h2>
+    </section>
+
+    <!-- شبكة المقالات (بنفس قياسات وتقسيم بطاقات الهوم) -->
+    <div class="articles-grid">
+      
+      <!-- 1. Phishing Awareness -->
+      <div class="article-card">
+        <div>
+          <div class="article-icon">🎣</div>
+          <h3 id="art-1" class="article-title">Phishing Awareness</h3>
+        </div>
+        <a href="#" class="read-more rm-text">→ Read More</a>
+      </div>
+
+      <!-- 2. Cyber Security Basics -->
+      <div class="article-card">
+        <div>
+          <div class="article-icon">🔐</div>
+          <h3 id="art-2" class="article-title">Cyber Security Basics</h3>
+        </div>
+        <a href="#" class="read-more rm-text">→ Read More</a>
+      </div>
+
+      <!-- 3. Online Safety -->
+      <div class="article-card">
+        <div>
+          <div class="article-icon">🌐</div>
+          <h3 id="art-3" class="article-title">Online Safety</h3>
+        </div>
+        <a href="#" class="read-more rm-text">→ Read More</a>
+      </div>
+
+      <!-- 4. Password Protection -->
+      <div class="article-card">
+        <div>
+          <div class="article-icon">🔑</div>
+          <h3 id="art-4" class="article-title">Password Protection</h3>
+        </div>
+        <a href="#" class="read-more rm-text">→ Read More</a>
+      </div>
+
+    </div>
+
+    <!-- Footer مطابق للهوم تماماً -->
+    <footer>
+      <div class="footer-content">
+        <div style="flex: 1;">
+          <h2 style="font-size: 28px; margin-bottom: 5px;">AMAN</h2>
+          <p id="footer-sub" style="color: #D3C2CF;">Your Digital Safety Companion</p>
+        </div>
+        <div class="footer-col" style="margin-left: 40px;">
+          <h4 id="footer-more">More</h4>
+          <ul>
+            <li><a href="quiz.html" class="f-quiz">Cyber Quiz</a></li>
+            <li><a href="about.html" class="f-about">About Us</a></li>
+            <li><a href="support.html" class="f-support">Help & Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 id="footer-quick">Quick Links</h4>
+          <ul>
+            <li><a href="index.html" class="f-home">Home</a></li>
+            <li><a href="safety.html" class="f-safety">Safety Center</a></li>
+            <li><a href="checker.html" class="f-checker">Link Checker</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom" id="footer-rights">
+        .AMAN. All Rights Reserved 2026 ©️
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- سكربت الترجمة -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const langBtn = document.getElementById("lang-btn");
+      const htmlRoot = document.documentElement;
+
+      let currentLang = localStorage.getItem("aman_lang") || "en";
+
+      function applyLanguage(lang) {
+        if (lang === "ar") {
+          htmlRoot.setAttribute("dir", "rtl");
+          if(langBtn) langBtn.innerText = "EN | AR";
+
+          document.querySelector(".nav-home").innerText = "الرئيسية";
+          document.querySelector(".nav-safety").innerText = "مركز الأمان";
+          document.querySelector(".nav-checker").innerText = "فحص الروابط";
+          document.querySelector(".nav-quiz").innerText = "الاختبار";
+          document.querySelector(".nav-about").innerText = "من نحن";
+
+          document.getElementById("page-title").innerText = "المكتبة الرقمية";
+          document.getElementById("page-subtitle").innerText = "استكشف. تعلم. ابقَ محمياً.";
+          
+          document.getElementById("intro-title").innerText = "المعرفة هي حمايتك";
+          document.getElementById("intro-desc").innerText = "اكتشف مقالات وإرشادات مفيدة حول الأمان الرقمي.";
+
+          document.getElementById("search-input").placeholder = "ابحث عن المقالات...";
+          document.getElementById("explore-title").innerText = "استكشف المقالات";
+
+          document.getElementById("art-1").innerText = "التوعية بالتصيد الاحتيالي";
+          document.getElementById("art-2").innerText = "أساسيات الأمن السيبراني";
+          document.getElementById("art-3").innerText = "الأمان عبر الإنترنت";
+          document.getElementById("art-4").innerText = "حماية كلمات المرور";
+
+          const readMoreLinks = document.querySelectorAll(".rm-text");
+          readMoreLinks.forEach(link => link.innerText = "اقرأ المزيد ←");
+
+          document.getElementById("footer-sub").innerText = "رفيقك للأمان الرقمي";
+          document.getElementById("footer-more").innerText = "المزيد";
+          document.querySelector(".f-quiz").innerText = "الاختبار";
+          document.querySelector(".f-about").innerText = "من نحن";
+          document.querySelector(".f-support").innerText = "المساعدة والدعم";
+
+          document.getElementById("footer-quick").innerText = "روابط سريعة";
+          document.querySelector(".f-home").innerText = "الرئيسية";
+          document.querySelector(".f-safety").innerText = "مركز الأمان";
+          document.querySelector(".f-checker").innerText = "فحص الروابط";
+
+          document.getElementById("footer-rights").innerText = "جميع الحقوق محفوظة .AMAN. 2026 ©";
+
+        } else {
+          htmlRoot.setAttribute("dir", "ltr");
+          if(langBtn) langBtn.innerText = "AR | EN";
+
+          document.querySelector(".nav-home").innerText = "Home";
+          document.querySelector(".nav-safety").innerText = "Safety Center";
+          document.querySelector(".nav-checker").innerText = "Line Checker";
+          document.querySelector(".nav-quiz").innerText = "Quiz";
+          document.querySelector(".nav-about").innerText = "About";
+
+          document.getElementById("page-title").innerText = "Cyber Library";
+          document.getElementById("page-subtitle").innerText = ".Explore. Learn. Stay Protected";
+          
+          document.getElementById("intro-title").innerText = "Knowledge Is Your Protection";
+          document.getElementById("intro-desc").innerText = "Discover useful articles and guides about digital safety.";
+
+          document.getElementById("search-input").placeholder = "...Search articles";
+          document.getElementById("explore-title").innerText = "Explore Articles";
+
+          document.getElementById("art-1").innerText = "Phishing Awareness";
+          document.getElementById("art-2").innerText = "Cyber Security Basics";
+          document.getElementById("art-3").innerText = "Online Safety";
+          document.getElementById("art-4").innerText = "Password Protection";
+
+          const readMoreLinks = document.querySelectorAll(".rm-text");
+          readMoreLinks.forEach(link => link.innerText = "→ Read More");
+
+          document.getElementById("footer-sub").innerText = "Your Digital Safety Companion";
+          document.getElementById("footer-more").innerText = "More";
+          document.querySelector(".f-quiz").innerText = "Cyber Quiz";
+          document.querySelector(".f-about").innerText = "About Us";
+          document.querySelector(".f-support").innerText = "Help & Support";
+
+          document.getElementById("footer-quick").innerText = "Quick Links";
+          document.querySelector(".f-home").innerText = "Home";
+          document.querySelector(".f-safety").innerText = "Safety Center";
+          document.querySelector(".f-checker").innerText = "Link Checker";
+
+          document.getElementById("footer-rights").innerText = ".AMAN. All Rights Reserved 2026 ©️";
+        }
+      }
+
+      applyLanguage(currentLang);
+
+      if(langBtn) {
+        langBtn.addEventListener("click", function () {
+          currentLang = (currentLang === "en") ? "ar" : "en";
+          localStorage.setItem("aman_lang", currentLang);
+          applyLanguage(currentLang);
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMAN | Cyber Quiz</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body[dir="rtl"] {
+      text-align: right;
+    }
+    body[dir="rtl"] .option-btn {
+      text-align: right;
+    }
+    .quiz-box {
+      background-color: white;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 800px;
+      margin: 30px auto 60px auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+      display: none;
+    }
+
+    .option-btn {
+      display: block;
+      width: 100%;
+      padding: 15px 20px;
+      margin: 12px 0;
+      border: 1px solid #EAE2E8;
+      background-color: #FDFBFC;
+      border-radius: 12px;
+      text-align: left;
+      font-size: 16px;
+      color: var(--purple-dark);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .option-btn:hover {
+      background-color: var(--pink-card);
+      border-color: var(--btn-purple);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="desktop-container">
+    
+    <!-- Top Navigation -->
+    <header style="background-color: #F7EBEF; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 0 0 15px 15px;">
+      <ul class="nav-links" style="list-style: none; display: flex; gap: 15px; margin: 0; padding: 0; align-items: center;">
+        <li><a href="index.html" class="nav-home" style="text-decoration: none; color: #333; font-size: 14px;">Home</a></li>
+        <li><a href="safety.html" class="nav-safety" style="text-decoration: none; color: #333; font-size: 14px;">Safety Center</a></li>
+        <li><a href="checker.html" class="nav-checker" style="text-decoration: none; color: #333; font-size: 14px;">Line Checker</a></li>
+        <li><a href="quiz.html" class="nav-quiz" style="text-decoration: none; color: #333; font-size: 14px; font-weight: bold;">Quiz</a></li>
+        <li><a href="about.html" class="nav-about" style="text-decoration: none; color: #333; font-size: 14px;">About</a></li>
+        <li><span id="lang-btn" class="lang-switch" style="background: #D9536E; color: white; padding: 3px 8px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold;">AR | EN</span></li>
+      </ul>
+      <div class="logo" style="font-weight: bold; font-size: 20px; color: #2C1E3B;">AMAN</div>
+    </header>
+
+    <!-- Start Screen -->
+    <div id="start-screen">
+      <section class="hero" style="margin-bottom: 30px;">
+        <h1 id="hero-title">Cyber Quiz</h1>
+        <p id="hero-desc">Test your cybersecurity knowledge with random questions!</p>
+        <div class="card-icon" style="margin: 15px auto 0 auto;">🧠</div>
+      </section>
+
+      <div style="background-color: var(--purple-card); border-radius: 16px; padding: 35px; text-align: center; max-width: 800px; margin: 0 auto 40px auto;">
+        <h2 id="ready-title" style="color: var(--purple-dark); font-size: 24px; margin-bottom: 8px;">Ready to Test your Skills?</h2>
+        <p id="ready-desc" style="color: var(--text-muted); font-size: 15px; margin-bottom: 20px;">New questions every time you play!</p>
+        <button id="start-btn" class="btn-pink" style="cursor: pointer;">Start Quiz</button>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 20px; max-width: 800px; margin: 0 auto 60px auto;">
+        <div class="card pink" style="flex: 1;">
+          <h3 id="f1-title" style="color: var(--purple-dark); font-size: 20px;">Dynamic</h3>
+          <p id="f1-desc" style="color: var(--text-muted);">Randomized</p>
+        </div>
+        <div class="card purple" style="flex: 1;">
+          <h3 id="f2-title" style="color: var(--purple-dark); font-size: 20px;">5 Minutes</h3>
+          <p id="f2-desc" style="color: var(--text-muted);">Time</p>
+        </div>
+        <div class="card pink" style="flex: 1;">
+          <h3 id="f3-title" style="color: var(--purple-dark); font-size: 20px;">5 Questions</h3>
+          <p id="f3-desc" style="color: var(--text-muted);">Per Round</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz Box -->
+    <div id="quiz-container" class="quiz-box">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 20px; color: var(--text-muted); font-weight: 600;">
+        <span id="question-count">Question 1 of 5</span>
+        <span id="score-tracker">Score: 0</span>
+      </div>
+      <h3 id="question-text" style="color: var(--purple-dark); font-size: 22px; margin-bottom: 25px;">Question text</h3>
+      <div id="options-container"></div>
+    </div>
+
+    <!-- Result Box -->
+    <div id="result-container" class="quiz-box" style="text-align: center;">
+      <h2 id="res-title" style="color: var(--purple-dark); font-size: 28px; margin-bottom: 15px;">🎉 Quiz Completed!</h2>
+      <p id="final-score-text" style="font-size: 18px; color: var(--text-muted); margin-bottom: 25px;">You scored 0 out of 5</p>
+      <button id="restart-btn" class="btn-pink" style="cursor: pointer;">Play Again (New Questions)</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div style="text-align: center; color: white;">
+        <h2 style="font-size: 24px; margin-bottom: 5px;">AMAN</h2>
+        <p id="footer-rights" style="font-size: 13px; color: #D3C2CF; margin-bottom: 15px;">.AMAN. All Rights Reserved 2026 ©️</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- سكربت الاختبار الثنائي اللغة مع ذاكرة المتصفح -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const allQuestions = [
+        { 
+          en: { question: "What is phishing?", options: ["A type of online scam", "A computer game", "A programming language"] },
+          ar: { question: "ما هو التصيد الاحتيالي (Phishing)؟", options: ["نوع من الاحتيال عبر الإنترنت", "لعبة حاسوبية", "لغة برمجة"] },
+          answer: 0 
+        },
+        { 
+          en: { question: "What should you do if you receive a suspicious link?", options: ["Click it immediately", "Ignore and avoid clicking it", "Share it with friends"] },
+          ar: { question: "ماذا يجب أن تفعل إذا تلقيت رابطاً مشبوهاً؟", options: ["انقر عليه فوراً", "تجاهله وتجنب النقر عليه", "شاركه مع أصدقائك"] },
+          answer: 1 
+        },
+        { 
+          en: { question: "Which of these makes a strong password?", options: ["123456", "Your birthday date", "A mix of letters, numbers & symbols"] },
+          ar: { question: "أي مما يلي يُعتبر كلمة مرور قوية؟", options: ["123456", "تاريخ ميلادك", "خليط من الحروف والأرقام والرموز"] },
+          answer: 2 
+        },
+        { 
+          en: { question: "Should you share your OTP (One-Time Password) with anyone?", options: ["Yes, if they ask nicely", "No, never share it", "Yes, with strangers"] },
+          ar: { question: "هل يجب أن تشارك رمز التحقق (OTP) مع أي شخص؟", options: ["نعم إذا طلبوا بأدب", "لا، لا تشاركه أبداً", "نعم مع الغرباء"] },
+          answer: 1 
+        },
+        { 
+          en: { question: "What is digital safety?", options: ["Protecting your personal info online", "Turning off the computer", "Buying a new phone"] },
+          ar: { question: "ما هو الأمان الرقمي؟", options: ["حماية معلوماتك الشخصية على الإنترنت", "إطفاء الكمبيوتر", "شراء هاتف جديد"] },
+          answer: 0 
+        },
+        { 
+          en: { question: "What is two-factor authentication (2FA)?", options: ["An extra layer of security", "A broken password", "A dual screen monitor"] },
+          ar: { question: "ما هي المصادقة الثنائية (2FA)؟", options: ["طبقة أمان إضافية", "كلمة مرور معطلة", "شاشة عرض مزدوجة"] },
+          answer: 0 
+        },
+        { 
+          en: { question: "If someone blackmails you online, what is the first step?", options: ["Pay them money", "Block, save evidence, and tell a trusted adult", "Delete all your accounts"] },
+          ar: { question: "إذا ابتزك شخص ما عبر الإنترنت، ما هي الخطوة الأولى؟", options: ["ادفع له المال", "احظر، احفظ الدليل، وأخبر شخصاً موثوقاً", "احذف جميع حساباتك"] },
+          answer: 1 
+        },
+        { 
+          en: { question: "Is it safe to use public Wi-Fi for banking without a VPN?", options: ["Yes, completely safe", "No, it is risky and unencrypted", "Only at night"] },
+          ar: { question: "هل من الآمن استخدام شبكة Wi-Fi عامة للمعاملات البنكية بدون VPN؟", options: ["نعم آمن تماماً", "لا، إنه محفوف بالمخاطر وغير مشفر", "فقط في الليل"] },
+          answer: 1 
+        },
+        { 
+          en: { question: "What does HTTPS mean in a website URL?", options: ["Hyper Text Transfer Protocol Secure (Encrypted)", "High Traffic Page Source", "Home Page Testing System"] },
+          ar: { question: "ماذا تعني الحروف HTTPS في رابط الموقع؟", options: ["بروتوكول نقل النص الفائق الآمن (مشفر)", "مصدر صفحة عالي الحركة", "نظام اختبار الصفحة الرئيسية"] },
+          answer: 0 
+        },
+        { 
+          en: { question: "How often should you update your passwords?", options: ["Never", "Every few months or if breached", "Every hour"] },
+          ar: { question: "كم مرة يجب أن تحدث كلمات المرور الخاصة بك؟", options: ["أبداً", "كل بضعة أشهر أو في حال حدوث تسريب", "كل ساعة"] },
+          answer: 1 
+        }
+      ];
+
+      let selectedQuestions = [];
+      let currentQuestionIndex = 0;
+      let score = 0;
+
+      // قراءة اللغة من الذاكرة تماماً مثل بقية الصفحات
+      let currentLang = localStorage.getItem("aman_lang") || "en";
+
+      const startScreen = document.getElementById('start-screen');
+      const quizContainer = document.getElementById('quiz-container');
+      const resultContainer = document.getElementById('result-container');
+      const questionText = document.getElementById('question-text');
+      const optionsContainer = document.getElementById('options-container');
+      const questionCount = document.getElementById('question-count');
+      const scoreTracker = document.getElementById('score-tracker');
+      const finalScoreText = document.getElementById('final-score-text');
+      
+      const startBtn = document.getElementById('start-btn');
+      const restartBtn = document.getElementById('restart-btn');
+      const langBtn = document.getElementById("lang-btn");
+      const htmlRoot = document.getElementById("html-root");
+
+      function getRandomQuestions() {
+        let shuffled = [...allQuestions].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, 5);
+      }
+
+      startBtn.addEventListener('click', function() {
+        startScreen.style.display = 'none';
+        quizContainer.style.display = 'block';
+        selectedQuestions = getRandomQuestions();
+        currentQuestionIndex = 0;
+        score = 0;
+        showQuestion();
+      });
+
+      function showQuestion() {
+        let qObj = selectedQuestions[currentQuestionIndex];
+        let qData = (currentLang === "ar") ? qObj.ar : qObj.en;
+
+        if (currentLang === "ar") {
+          questionCount.innerText = `السؤال ${currentQuestionIndex + 1} من ${selectedQuestions.length}`;
+          scoreTracker.innerText = `النتيجة: ${score}`;
+        } else {
+          questionCount.innerText = `Question ${currentQuestionIndex + 1} of ${selectedQuestions.length}`;
+          scoreTracker.innerText = `Score: ${score}`;
+        }
+
+        questionText.innerText = qData.question;
+        optionsContainer.innerHTML = '';
+
+        qData.options.forEach((option, index) => {
+          let btn = document.createElement('button');
+          btn.className = 'option-btn';
+          btn.innerText = option;
+          btn.onclick = function() {
+            if (index === qObj.answer) {
+              score++;
+            }
+            currentQuestionIndex++;
+            if (currentQuestionIndex < selectedQuestions.length) {
+              showQuestion();
+            } else {
+              showResult();
+            }
+          };
+          optionsContainer.appendChild(btn);
+        });
+      }
+
+      function showResult() {
+        quizContainer.style.display = 'none';
+        resultContainer.style.display = 'block';
+        if (currentLang === "ar") {
+          finalScoreText.innerText = `لقد حصلت على ${score} من ${selectedQuestions.length}`;
+        } else {
+          finalScoreText.innerText = `You scored ${score} out of ${selectedQuestions.length}`;
+        }
+      }
+
+      restartBtn.addEventListener('click', function() {
+        resultContainer.style.display = 'none';
+        startScreen.style.display = 'block';
+      });
+
+      // دالة تطبيق واجهات اللغة
+      function applyLanguage(lang) {
+        if (lang === "ar") {
+          htmlRoot.setAttribute("dir", "rtl");
+          if(langBtn) langBtn.innerText = "EN | AR";
+
+          document.querySelector(".nav-home").innerText = "الرئيسية";
+          document.querySelector(".nav-safety").innerText = "مركز الأمان";
+          document.querySelector(".nav-checker").innerText = "فحص الروابط";
+          document.querySelector(".nav-quiz").innerText = "الاختبار";
+          document.querySelector(".nav-about").innerText = "من نحن";
+
+          document.getElementById("hero-title").innerText = "اختبار الأمن السيبراني";
+          document.getElementById("hero-desc").innerText = "اختبر معلوماتك في الأمن السيبراني من خلال أسئلة عشوائية!";
+
+          document.getElementById("ready-title").innerText = "هل أنت مستعد لاختبار مهاراتك؟";
+          document.getElementById("ready-desc").innerText = "أسئلة جديدة في كل مرة تلعب فيها!";
+          document.getElementById("start-btn").innerText = "ابدأ الاختبار";
+
+          document.getElementById("f1-title").innerText = "ديناميكي";
+          document.getElementById("f1-desc").innerText = "أسئلة عشوائية";
+          document.getElementById("f2-title").innerText = "5 دقائق";
+          document.getElementById("f2-desc").innerText = "الوقت";
+          document.getElementById("f3-title").innerText = "5 أسئلة";
+          document.getElementById("f3-desc").innerText = "لكل جولة";
+
+          document.getElementById("res-title").innerText = "🎉 انتهى الاختبار!";
+          document.getElementById("restart-btn").innerText = "العب مرة أخرى (أسئلة جديدة)";
+          document.getElementById("footer-rights").innerText = "جميع الحقوق محفوظة .AMAN. 2026 ©";
+
+        } else {
+          htmlRoot.setAttribute("dir", "ltr");
+          if(langBtn) langBtn.innerText = "AR | EN";
+
+          document.querySelector(".nav-home").innerText = "Home";
+          document.querySelector(".nav-safety").innerText = "Safety Center";
+          document.querySelector(".nav-checker").innerText = "Line Checker";
+          document.querySelector(".nav-quiz").innerText = "Quiz";
+          document.querySelector(".nav-about").innerText = "About";
+
+          document.getElementById("hero-title").innerText = "Cyber Quiz";
+          document.getElementById("hero-desc").innerText = "Test your cybersecurity knowledge with random questions!";
+
+          document.getElementById("ready-title").innerText = "Ready to Test your Skills?";
+          document.getElementById("ready-desc").innerText = "New questions every time you play!";
+          document.getElementById("start-btn").innerText = "Start Quiz";
+
+          document.getElementById("f1-title").innerText = "Dynamic";
+          document.getElementById("f1-desc").innerText = "Randomized";
+          document.getElementById("f2-title").innerText = "5 Minutes";
+          document.getElementById("f2-desc").innerText = "Time";
+          document.getElementById("f3-title").innerText = "5 Questions";
+          document.getElementById("f3-desc").innerText = "Per Round";
+
+          document.getElementById("res-title").innerText = "🎉 Quiz Completed!";
+          document.getElementById("restart-btn").innerText = "Play Again (New Questions)";
+          document.getElementById("footer-rights").innerText = ".AMAN. All Rights Reserved 2026 ©️";
+        }
+      }
+
+      // تطبيق اللغة فور فتح الصفحة
+      applyLanguage(currentLang);
+
+      // زر الترجمة والتحويل الشامل
+      if(langBtn) {
+        langBtn.addEventListener("click", function () {
+          currentLang = (currentLang === "en") ? "ar" : "en";
+          localStorage.setItem("aman_lang", currentLang);
+          applyLanguage(currentLang);
+
+          if (quizContainer.style.display === 'block') {
+            showQuestion();
+          }
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

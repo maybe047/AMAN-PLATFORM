@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMAN | Cyber Attack Simulator</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body[dir="rtl"] {
+      text-align: right;
+    }
+    
+    /* تأثير الشاشة الحمراء الخطيرة مع الوميض */
+    body.danger-mode {
+      background-color: #4A1515 !important;
+      animation: flashWarning 0.5s infinite alternate;
+    }
+    @keyframes flashWarning {
+      0% { background-color: #5C1E1E; }
+      100% { background-color: #8B0000; }
+    }
+
+    body.danger-mode .desktop-container {
+      background-color: #3B1010;
+      border: 2px solid #FF4D4D;
+      box-shadow: 0 0 40px rgba(255, 0, 0, 0.6);
+    }
+    body.danger-mode header {
+      background-color: #2A0808 !important;
+    }
+    body.danger-mode .sim-box {
+      background-color: #591C1C;
+      border-color: #FF4D4D;
+      color: #FFD2D2;
+    }
+
+    /* تأثير شاشة النجاح الخضراء الهادئة */
+    body.success-mode .desktop-container {
+      border: 2px solid #4CAF50;
+      box-shadow: 0 0 30px rgba(76, 175, 80, 0.3);
+    }
+
+    .sim-container {
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 0 20px;
+      flex: 1;
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sim-box {
+      background-color: #EFE3ED;
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 25px;
+      border: 1px solid #E5D5E0;
+      transition: all 0.3s ease;
+    }
+
+    .sim-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2C1E3B;
+      margin-bottom: 10px;
+    }
+    body.danger-mode .sim-title {
+      color: #FF8080;
+    }
+
+    .sim-desc {
+      font-size: 14px;
+      color: #665C71;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    body.danger-mode .sim-desc {
+      color: #FFE6E6;
+    }
+
+    .choices-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .choice-btn {
+      background-color: white;
+      color: #2C1E3B;
+      border: 1px solid #E0D0DC;
+      padding: 14px 18px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    body[dir="rtl"] .choice-btn {
+      text-align: right;
+    }
+
+    .choice-btn:hover {
+      background-color: #F8EDF2;
+      border-color: #D9536E;
+      color: #D9536E;
+    }
+
+    .alert-box {
+      display: none;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+      animation: popIn 0.3s ease;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.95); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .alert-box.success {
+      background-color: #E2F0D9;
+      color: #385723;
+      border: 1px solid #C3D69B;
+    }
+    .alert-box.error {
+      background-color: #F8D7DA;
+      color: #721C24;
+      border: 1px solid #F5C6CB;
+    }
+
+    .next-btn, .restart-btn {
+      background-color: #2C1E3B;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      margin-top: 15px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.1s;
+    }
+    .next-btn:active, .restart-btn:active {
+      transform: scale(0.95);
+    }
+
+    .progress-indicator {
+      font-size: 12px;
+      font-weight: bold;
+      color: #D9536E;
+      margin-bottom: 10px;
+      display: block;
+    }
+  </style>
+</head>
+<body id="body-content">
+
+  <div class="desktop-container">
+    
+    <!-- Top Navigation -->
+    <header style="background-color: #F7EBEF; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 0 0 15px 15px;">
+      <ul class="nav-links" style="list-style: none; display: flex; gap: 15px; margin: 0; padding: 0; align-items: center;">
+        <li><a href="index.html" class="nav-home" style="text-decoration: none; color: #333; font-size: 14px;">Home</a></li>
+        <li><a href="safety.html" class="nav-safety" style="text-decoration: none; color: #333; font-size: 14px;">Safety Center</a></li>
+        <li><a href="checker.html" class="nav-checker" style="text-decoration: none; color: #333; font-size: 14px;">Line Checker</a></li>
+        <li><a href="quiz.html" class="nav-quiz" style="text-decoration: none; color: #333; font-size: 14px;">Quiz</a></li>
+        <li><a href="about.html" class="nav-about" style="text-decoration: none; color: #333; font-size: 14px;">About</a></li>
+        <li><span id="lang-btn" class="lang-switch" style="background: #D9536E; color: white; padding: 3px 8px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold;">AR | EN</span></li>
+      </ul>
+      <div class="logo" style="font-weight: bold; font-size: 20px; color: #2C1E3B;">AMAN</div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="text-align: center; margin-bottom: 25px;">
+      <div style="font-size: 32px; margin-bottom: 10px;">⚡</div>
+      <h1 id="page-title" style="margin: 0 0 5px 0; color: var(--purple-dark, #2C1E3B);">Cyber Attack Simulator</h1>
+      <p id="page-subtitle" style="color: var(--text-muted, #665C71); margin: 0;">Test your defense instincts in random scenarios.</p>
+    </section>
+
+    <!-- محتوى السيناريو التفاعلي -->
+    <div class="sim-container">
+      <div class="sim-box" id="sim-card">
+        <span class="progress-indicator" id="progress-txt">Security Challenge</span>
+        <h2 class="sim-title" id="sim-title">Loading...</h2>
+        <p class="sim-desc" id="sim-desc">Loading...</p>
+        
+        <div class="choices-list" id="choices-container"></div>
+        <div id="result-box" class="alert-box"></div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div style="flex: 1;">
+          <h2 style="font-size: 28px; margin-bottom: 5px;">AMAN</h2>
+          <p id="footer-sub" style="color: #D3C2CF;">Your Digital Safety Companion</p>
+        </div>
+        <div class="footer-col" style="margin-left: 40px;">
+          <h4 id="footer-more">More</h4>
+          <ul>
+            <li><a href="quiz.html" class="f-quiz">Cyber Quiz</a></li>
+            <li><a href="about.html" class="f-about">About Us</a></li>
+            <li><a href="support.html" class="f-support">Help & Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 id="footer-quick">Quick Links</h4>
+          <ul>
+            <li><a href="index.html" class="f-home">Home</a></li>
+            <li><a href="safety.html" class="f-safety">Safety Center</a></li>
+            <li><a href="checker.html" class="f-checker">Link Checker</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom" id="footer-rights">
+        .AMAN. All Rights Reserved 2026 ©️
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    function playSound(type) {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        osc.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        if (type === 'error') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+          osc.frequency.setValueAtTime(600, audioCtx.currentTime + 0.15);
+          gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.3);
+        } else if (type === 'success') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+          osc.frequency.setValueAtTime(650, audioCtx.currentTime + 0.1);
+          gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.25);
+        }
+      } catch (e) {
+        console.log("Audio not supported or blocked");
+      }
+    }
+
+    function shuffleArray(array) {
+      let currentIndex = array.length, randomIndex;
+      while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+      }
+      return array;
+    }
+
+    const baseScenarios = {
+      en: [
+        {
+          title: "Urgent Bank Alert",
+          desc: "You receive an email claiming your bank account is locked. It asks you to click a link immediately.",
+          choices: [
+            { text: "Click the link and enter your password.", correct: false },
+            { text: "Ignore and open the official banking app directly.", correct: true },
+            { text: "Forward the email to public social media.", correct: false }
+          ]
+        },
+        {
+          title: "Suspicious USB Drive",
+          desc: "You find a USB flash drive on your desk labeled 'Salary Roster 2026'.",
+          choices: [
+            { text: "Plug it into your computer to see whose it is.", correct: false },
+            { text: "Hand it to IT security without plugging it in.", correct: true },
+            { text: "Format it and use it for personal files.", correct: false }
+          ]
+        },
+        {
+          title: "Social Media Code",
+          desc: "You receive an SMS code for password reset, then a friend asks for it.",
+          choices: [
+            { text: "Send the code to your friend immediately.", correct: false },
+            { text: "Post the code online as a joke.", correct: false },
+            { text: "Refuse to share and enable 2FA on your account.", correct: true }
+          ]
+        },
+        {
+          title: "Free Public Wi-Fi",
+          desc: "You see an open Wi-Fi network named 'Free_Public_WiFi_5G'.",
+          choices: [
+            { text: "Connect immediately to save mobile data.", correct: false },
+            { text: "Use your secure mobile data instead.", correct: true },
+            { text: "Log into your corporate email right away.", correct: false }
+          ]
+        },
+        {
+          title: "Fake Antivirus Pop-up",
+          desc: "A browser pop-up claims your PC is infected and asks you to download an update.",
+          choices: [
+            { text: "Click download to fix it instantly.", correct: false },
+            { text: "Close the browser tab immediately.", correct: true },
+            { text: "Call the phone number displayed on the pop-up.", correct: false }
+          ]
+        },
+        {
+          title: "Password Reuse Risk",
+          desc: "A minor shopping website got breached, and you use that exact password for your main email.",
+          choices: [
+            { text: "Do nothing since it's just a small site.", correct: false },
+            { text: "Change your email password immediately.", correct: true },
+            { text: "Share your password with friends to test it.", correct: false }
+          ]
+        },
+        {
+          title: "Suspicious Package SMS",
+          desc: "An SMS states your package is held at customs and asks you to pay a $2 fee via link.",
+          choices: [
+            { text: "Click the link and pay with your card.", correct: false },
+            { text: "Check the official shipping carrier tracking app.", correct: true },
+            { text: "Reply with your credit card details via text.", correct: false }
+          ]
+        },
+        {
+          title: "Unsolicited Remote Support",
+          desc: "A caller claims to be from Microsoft tech support and says your PC is broadcasting errors.",
+          choices: [
+            { text: "Give them remote access to fix it.", correct: false },
+            { text: "Hang up immediately.", correct: true },
+            { text: "Ask them for their bank details.", correct: false }
+          ]
+        },
+        {
+          title: "Phishing Phone Call (Vishing)",
+          desc: "Someone calls claiming to be from your bank asking for your full PIN code.",
+          choices: [
+            { text: "Provide the PIN to verify your identity.", correct: false },
+            { text: "Refuse and call the bank's official printed number.", correct: true },
+            { text: "Tell them your password as well.", correct: false }
+          ]
+        },
+        {
+          title: "Public Charging Kiosk",
+          desc: "Your phone battery is low at an airport, and a public USB charging station is available.",
+          choices: [
+            { text: "Plug your phone directly into the public USB port.", correct: false },
+            { text: "Use your own wall adapter and power outlet.", correct: true },
+            { text: "Connect your laptop to the kiosk too.", correct: false }
+          ]
+        }
+      ],
+      ar: [
+        {
+          title: "تنبيه البنك العاجل",
+          desc: "تلقيت رسالة بريد إلكتروني تزعم أن حسابك البنكي مقفل. وتطلب منك النقر على رابط فوراً.",
+          choices: [
+            { text: "انقر على الرابط وأدخل كلمة المرور.", correct: false },
+            { text: "تجاهل الرسالة وافتح تطبيق البنك الرسمي.", correct: true },
+            { text: "قم بإعادة توجيه البريد لوسائل التواصل الاجتماعي.", correct: false }
+          ]
+        },
+        {
+          title: "فلاش ميموري مشبوه",
+          desc: "وجدت فلاش ميموري على مكتبك مكتوب عليه 'رواتب الموظفين 2026'.",
+          choices: [
+            { text: "اربطه بحاسوبك لمعرفة لمن يتبع.", correct: false },
+            { text: "تسليمه لقسم أمن المعلومات فوراً بدون ربطه.", correct: true },
+            { text: "قم بفرمتته واستخدامه لملفاتك الشخصية.", correct: false }
+          ]
+        },
+        {
+          title: "رمز وسائل التواصل",
+          desc: "وصلك رمز SMS لتغيير كلمة المرور، ثم طلب صديق منك إرسال الرمز.",
+          choices: [
+            { text: "أرسل الرمز لصديقك لمساعدته.", correct: false },
+            { text: "انشر الرمز على صفحتك العامة كمزحة.", correct: false },
+            { text: "رفض المشاركة وتفعيل المصادقة الثنائية (2FA).", correct: true }
+          ]
+        },
+        {
+          title: "الواي فاي العام المجاني",
+          desc: "رأيت شبكة واي فاي مفتوحة باسم 'Free_Public_WiFi_5G'.",
+          choices: [
+            { text: "اتصل بها فوراً لتوفير بيانات الهاتف.", correct: false },
+            { text: "استخدم بيانات هاتفك المحمول الآمنة.", correct: true },
+            { text: "سجل الدخول لحسابات العمل المهمة فورا.", correct: false }
+          ]
+        },
+        {
+          title: "نافذة مضاد الفيروسات الوهمي",
+          desc: "ظهرت نافذة متصفح تدعي أن حاسوبك مصاب وتطلب تحميل تحديث عاجل.",
+          choices: [
+            { text: "انقر على زر التحميل للإصلاح.", correct: false },
+            { text: "أغلق نافذة المتصفح على الفور.", correct: true },
+            { text: "اتصل برقم الدعم الموجود في النافذة.", correct: false }
+          ]
+        },
+        {
+          title: "خطر إعادة استخدام كلمات المرور",
+          desc: "موقع تسوق صغير تعرض لاختراق، وأنت تستخدم نفس كلمة المرور لبريدك الرئيسي.",
+          choices: [
+            { text: "لا تفعل شيئاً لأنه موقع بسيط.", correct: false },
+            { text: "غير كلمة مرور بريدك الإلكتروني فوراً.", correct: true },
+            { text: "شارك كلمة المرور مع أصدقائك لفحصها.", correct: false }
+          ]
+        },
+        {
+          title: "رسالة طرود وهمية",
+          desc: "رسالة نصية تقول إن طردك محتجز في الجمارك وتطلب دفع 2$ عبر رابط.",
+          choices: [
+            { text: "انقر على الرابط وادفع بالبطاقة.", correct: false },
+            { text: "تحقق من تطبيق شركة الشحن الرسمي.", correct: true },
+            { text: "أرسل تفاصيل بطاقتك الائتمانية برسالة نصية.", correct: false }
+          ]
+        },
+        {
+          title: "الدعم الفني الوهمي",
+          desc: "متصل يدعي أنه من دعم مايكروسوفت ويخبرك بوجود أخطاء في حاسوبك.",
+          choices: [
+            { text: "اعطهم حق الوصول عن بعد للإصلاح.", correct: false },
+            { text: "اغلق المكالمة فوراً.", correct: true },
+            { text: "اطلب منهم تحويل أموال لك.", correct: false }
+          ]
+        },
+        {
+          title: "الاتصال الهاتفي الاحتيالي",
+          desc: "شخص يتصل يدعي أنه من البنك ويطلب رمز PIN الكامل.",
+          choices: [
+            { text: "أعطه الرمز لتأكيد هويتك.", correct: false },
+            { text: "ارفض واتصل بالرقم الرسمي للبنك.", correct: true },
+            { text: "أخبره بكلمة المرور الخاصة بك أيضاً.", correct: false }
+          ]
+        },
+        {
+          title: "محطات الشحن العامة",
+          desc: "بطارية هاتفك منخفضة في المطار وتتوفر محطة شحن USB عامة.",
+          choices: [
+            { text: "اشحن هاتفك مباشرة بمنفذ الـ USB العام.", correct: false },
+            { text: "استخدم شاحنك الخاص ومقبس الكهرباء.", correct: true },
+            { text: "اربط حاسوبك المحطة للشحن ونقل البيانات.", correct: false }
+          ]
+        }
+      ]
+    };
+
+    let shuffledScenarios = { en: [], ar: [] };
+
+    function generate100Scenarios() {
+      let enList = [...baseScenarios.en];
+      let arList = [...baseScenarios.ar];
+
+      // مولد أسئلة متنوعة بدون أرقام ظاهرة
+      const enPool = [
+        { title: "Public Document Access", desc: "A stranger asks you to open a shared document file from an unknown cloud link on your work laptop.", choice: "Verify the sender and scan the link before opening.", bad1: "Open the file immediately to see what it is.", bad2: "Forward the link to all colleagues." },
+        { title: "Unrecognized Login Attempt", desc: "You receive an alert about an unrecognized login attempt from a different country on your primary email.", choice: "Change your password immediately and enable 2FA.", bad1: "Ignore the alert since it's probably a system glitch.", bad2: "Reply to the alert email with your password." },
+        { title: "Software License Key", desc: "You find a forum post offering a free activation key for expensive professional software.", choice: "Avoid downloading or using unverified license cracks.", bad1: "Download and run the key generator tool.", bad2: "Share the link on your professional network." },
+        { title: "Suspicious Phone Voicemail", desc: "A voicemail claims your utility service will be cut off today unless you call an urgent callback number.", choice: "Call the official utility company number directly.", bad1: "Call the number provided in the voicemail immediately.", bad2: "Pay the requested amount via gift cards over the phone." },
+        { title: "Smart Device Setup", desc: "You bought a new smart home router and it prompts you to set it up using the default admin password.", choice: "Change the default admin password to a strong unique one.", bad1: "Keep the default password for convenience.", bad2: "Disable router security features entirely." }
+      ];
+
+      const arPool = [
+        title = { title: "مشاركة وثيقة عامة", desc: "شخص غريب يطلب منك فتح ملف مستند مشترك من رابط سحابة مجهول على لابتوب العمل.", choice: "التحقق من المرسل وفحص الرابط قبل فتحه.", bad1: "فتح الملف فوراً لمعرفة ما يحتويه.", bad2: "إعادة توجيه الرابط لجميع الزملاء." },
+        title2 = { title: "محاولة تسجيل دخول غريبة", desc: "تلقيت تنبيهاً حول محاولة تسجيل دخول غير معتروفة من دولة أخرى على بريدك الرئيسي.", choice: "تغيير كلمة المرور فوراً وتفعيل المصادقة الثنائية.", bad1: "تجاهل التنبيه لأنه غالباً خطأ تقني.", bad2: "الرد على بريد التنبيه بكلمة مرورك." },
+        title3 = { title: "مفتاح ترخيص برمجيات", desc: "وجدت منشوراً في منتدى يقدم مفتاح تفعيل مجاني لبرنامج مهني غالي الثمن.", choice: "تجنب تحميل أو استخدام كراكات التخريص غير الموثوقة.", bad1: "تحميل وتشغيل أداة توليد المفاتيح (Keygen).", bad2: "مشاركة الرابط على شبكتك المهنية." },
+        title4 = { title: "رسالة صوتية مشبوهة", desc: "رسالة صوتية تزعم أنه سيتم قطع خدمة الكهرباء اليوم ما لم تتصل برقم طوارئ فوري.", choice: "الاتصال برقم شركة الخدمات الرسمي المباشر.", bad1: "الاتصال بالرقم الموجود في البريد الصوتي فوراً.", bad2: "دفع المبلغ المطلوب عبر بطاقات الهدايا عبر الهاتف." },
+        title5 = { title: "إعداد جهاز ذكي منزلي", desc: "اشتريت موجّه واي فاي (راوتر) منزلي جديد ويطالبك بإعداده باستخدام كلمة مرور المسؤول الافتراضية.", choice: "تغيير كلمة مرور المسؤول الافتراضية بأخرى قوية وفريدة.", bad1: "الابقاء على كلمة المرور الافتراضية للسهولة.", bad2: "تعطيل ميزات الأمان في الراوتر تماماً." }
+      ];
+
+      // إكمال البقية حتى 100 سيناريو عشوائي ومتنوع وبدون أي أرقام
+      for (let i = 11; i <= 100; i++) {
+        let randEn = enPool[(i * 3) % enPool.length];
+        let randAr = arPool[(i * 3) % arPool.length];
+
+        enList.push({
+          title: randEn.title,
+          desc: randEn.desc,
+          choices: [
+            { text: randEn.bad1, correct: false },
+            { text: randEn.choice, correct: true },
+            { text: randEn.bad2, correct: false }
+          ]
+        });
+
+        arList.push({
+          title: randAr.title,
+          desc: randAr.desc,
+          choices: [
+            { text: randAr.bad1, correct: false },
+            { text: randAr.choice, correct: true },
+            { text: randAr.bad2, correct: false }
+          ]
+        });
+      }
+
+      shuffledScenarios.en = shuffleArray(enList);
+      shuffledScenarios.ar = shuffleArray(arList);
+    }
+
+    let currentIndex = 0;
+
+    function loadScenario() {
+      const currentLang = localStorage.getItem("aman_lang") || "en";
+      const list = shuffledScenarios[currentLang];
+      const item = list[currentIndex];
+
+      document.getElementById("progress-txt").innerText = currentLang === "ar" 
+        ? "تحدي الأمان الرقمي" 
+        : "Security Challenge";
+
+      document.getElementById("sim-title").innerText = item.title;
+      document.getElementById("sim-desc").innerText = item.desc;
+
+      const container = document.getElementById("choices-container");
+      container.innerHTML = "";
+      container.style.display = "flex";
+      document.getElementById("result-box").style.display = "none";
+      
+      document.body.classList.remove("danger-mode", "success-mode");
+
+      let shuffledChoices = shuffleArray([...item.choices]);
+
+      shuffledChoices.forEach((choice) => {
+        const btn = document.createElement("button");
+        btn.className = "choice-btn";
+        btn.innerText = choice.text;
+        btn.onclick = () => makeChoice(choice.correct);
+        container.appendChild(btn);
+      });
+    }
+
+    function makeChoice(isCorrect) {
+      const resultBox = document.getElementById("result-box");
+      const choicesContainer = document.getElementById("choices-container");
+      const body = document.body;
+      const currentLang = localStorage.getItem("aman_lang") || "en";
+
+      choicesContainer.style.display = "none";
+      resultBox.style.display = "block";
+
+      if (isCorrect) {
+        playSound('success');
+        body.classList.remove("danger-mode");
+        body.classList.add("success-mode");
+        resultBox.className = "alert-box success";
+        let htmlContent = currentLang === "ar" 
+          ? "🎉 إجابة صحيحة ومحترفة! لقد تصديت للهجوم بنجاح وحميت نظامك." 
+          : "🎉 Correct! You successfully defended against this threat.";
+
+        if (currentIndex < shuffledScenarios[currentLang].length - 1) {
+          htmlContent += `<br><button class="next-btn" onclick="nextScenario()">${currentLang === "ar" ? "السيناريو التالي ←" : "Next Scenario →"}</button>`;
+        } else {
+          htmlContent += `<br><b>${currentLang === "ar" ? "🏆 مبروك! أتممت جميع سيناريوهات الدفاع الـ 100 بامتياز وبطولة." : "🏆 Congratulations! You completed all 100 defense scenarios with excellence."}</b>`;
+          htmlContent += `<br><button class="restart-btn" onclick="resetAll()">${currentLang === "ar" ? "إعادة المحاولة من البداية" : "Restart All"}</button>`;
+        }
+        resultBox.innerHTML = htmlContent;
+      } else {
+        playSound('error');
+        body.classList.remove("success-mode");
+        body.classList.add("danger-mode");
+        resultBox.className = "alert-box error";
+        resultBox.innerHTML = currentLang === "ar"
+          ? "🚨 تنبيه خطير! تم اختراق نظامك بالكامل وسرقة بياناتك الحساسة!"
+          : "🚨 CRITICAL ALERT! Your system is fully compromised and data has been stolen!";
+        resultBox.innerHTML += `<br><button class="restart-btn" onclick="loadScenario()">${currentLang === "ar" ? "حاول مرة أخرى (إصلاح الاختراق)" : "Try Again"}</button>`;
+      }
+    }
+
+    function nextScenario() {
+      currentIndex++;
+      loadScenario();
+    }
+
+    function resetAll() {
+      currentIndex = 0;
+      generate100Scenarios();
+      loadScenario();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const langBtn = document.getElementById("lang-btn");
+      const htmlRoot = document.documentElement;
+      let currentLang = localStorage.getItem("aman_lang") || "en";
+
+      function updateStaticUI(lang) {
+        if (lang === "ar") {
+          htmlRoot.setAttribute("dir", "rtl");
+          if(langBtn) langBtn.innerText = "EN | AR";
+
+          document.querySelector(".nav-home").innerText = "الرئيسية";
+          document.querySelector(".nav-safety").innerText = "مركز الأمان";
+          document.querySelector(".nav-checker").innerText = "فحص الروابط";
+          document.querySelector(".nav-quiz").innerText = "الاختبار";
+          document.querySelector(".nav-about").innerText = "من نحن";
+
+          document.getElementById("page-title").innerText = "مُحاكي الهجمات السيبرانية";
+          document.getElementById("page-subtitle").innerText = "اختبر غريزتك الدفاعية في سيناريوهات عشوائية ومتسلسلة.";
+
+          document.getElementById("footer-sub").innerText = "رفيقك للأمان الرقمي";
+          document.getElementById("footer-more").innerText = "المزيد";
+          document.querySelector(".f-quiz").innerText = "الاختبار";
+          document.querySelector(".f-about").innerText = "من نحن";
+          document.querySelector(".f-support").innerText = "المساعدة والدعم";
+
+          document.getElementById("footer-quick").innerText = "روابط سريعة";
+          document.querySelector(".f-home").innerText = "الرئيسية";
+          document.querySelector(".f-safety").innerText = "مركز الأمان";
+          document.querySelector(".f-checker").innerText = "فحص الروابط";
+
+          document.getElementById("footer-rights").innerText = "جميع الحقوق محفوظة .AMAN. 2026 ©";
+        } else {
+          htmlRoot.setAttribute("dir", "ltr");
+          if(langBtn) langBtn.innerText = "AR | EN";
+
+          document.querySelector(".nav-home").innerText = "Home";
+          document.querySelector(".nav-safety").innerText = "Safety Center";
+          document.querySelector(".nav-checker").innerText = "Line Checker";
+          document.querySelector(".nav-quiz").innerText = "Quiz";
+          document.querySelector(".nav-about").innerText = "About";
+
+          document.getElementById("page-title").innerText = "Cyber Attack Simulator";
+          document.getElementById("page-subtitle").innerText = "Test your defense instincts in random sequential scenarios.";
+
+          document.getElementById("footer-sub").innerText = "Your Digital Safety Companion";
+          document.getElementById("footer-more").innerText = "More";
+          document.querySelector(".f-quiz").innerText = "Cyber Quiz";
+          document.querySelector(".f-about").innerText = "About Us";
+          document.querySelector(".f-support").innerText = "Help & Support";
+
+          document.getElementById("footer-quick").innerText = "Quick Links";
+          document.querySelector(".f-home").innerText = "Home";
+          document.querySelector(".f-safety").innerText = "Safety Center";
+          document.querySelector(".f-checker").innerText = "Link Checker";
+
+          document.getElementById("footer-rights").innerText = ".AMAN. All Rights Reserved 2026 ©️";
+        }
+      }
+
+      updateStaticUI(currentLang);
+      generate100Scenarios();
+      loadScenario();
+
+      if(langBtn) {
+        langBtn.addEventListener("click", function () {
+          currentLang = (currentLang === "en") ? "ar" : "en";
+          localStorage.setItem("aman_lang", currentLang);
+          updateStaticUI(currentLang);
+          loadScenario();
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

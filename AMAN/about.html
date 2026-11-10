@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMAN | About Us</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body[dir="rtl"] {
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="desktop-container">
+    
+    <!-- Top Navigation -->
+    <header style="background-color: #F7EBEF; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 0 0 15px 15px;">
+      <ul class="nav-links" style="list-style: none; display: flex; gap: 15px; margin: 0; padding: 0; align-items: center;">
+        <li><a href="index.html" class="nav-home" style="text-decoration: none; color: #333; font-size: 14px;">Home</a></li>
+        <li><a href="safety.html" class="nav-safety" style="text-decoration: none; color: #333; font-size: 14px;">Safety Center</a></li>
+        <li><a href="checker.html" class="nav-checker" style="text-decoration: none; color: #333; font-size: 14px;">Line Checker</a></li>
+        <li><a href="quiz.html" class="nav-quiz" style="text-decoration: none; color: #333; font-size: 14px;">Quiz</a></li>
+        <li><a href="about.html" class="nav-about" style="text-decoration: none; color: #333; font-size: 14px; font-weight: bold;">About</a></li>
+        <li><span id="lang-btn" class="lang-switch" style="background: #D9536E; color: white; padding: 3px 8px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold;">AR | EN</span></li>
+      </ul>
+      <div class="logo" style="font-weight: bold; font-size: 20px; color: #2C1E3B;">AMAN</div>
+    </header>
+
+    <!-- About Hero Section -->
+    <section class="hero">
+      <h1 id="hero-title">About AMAN</h1>
+      <p id="hero-desc">Empowering users with digital safety and cyber awareness.</p>
+    </section>
+
+    <!-- Main Content Box -->
+    <div style="background-color: white; border-radius: 16px; padding: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 50px;">
+      <h2 id="box-title" style="color: var(--purple-dark); margin-bottom: 10px;">Our Mission</h2>
+      <p id="box-desc" style="color: var(--text-muted); line-height: 1.6;">AMAN platform is designed to educate and protect internet users against modern cyber threats, phishing, and privacy leaks through simple and accessible tools.</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div style="text-align: center; color: white;">
+        <h2 style="font-size: 24px; margin-bottom: 5px;">AMAN</h2>
+        <p id="footer-rights" style="font-size: 13px; color: #D3C2CF; margin-bottom: 15px;">.AMAN. All Rights Reserved 2026 ©️</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- سكربت الترجمة الثابت والمربوط بذاكرة المتصفح -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const langBtn = document.getElementById("lang-btn");
+      const htmlRoot = document.getElementById("html-root");
+
+      // قراءة اللغة المخزنة في المتصفح تلقائياً
+      let currentLang = localStorage.getItem("aman_lang") || "en";
+
+      function applyLanguage(lang) {
+        if (lang === "ar") {
+          htmlRoot.setAttribute("dir", "rtl");
+          if(langBtn) langBtn.innerText = "EN | AR";
+
+          document.querySelector(".nav-home").innerText = "الرئيسية";
+          document.querySelector(".nav-safety").innerText = "مركز الأمان";
+          document.querySelector(".nav-checker").innerText = "فحص الروابط";
+          document.querySelector(".nav-quiz").innerText = "الاختبار";
+          document.querySelector(".nav-about").innerText = "من نحن";
+
+          document.getElementById("hero-title").innerText = "عن منصة أمان";
+          document.getElementById("hero-desc").innerText = "تمكين المستخدمين بالأمان الرقمي والتوعية السيبرانية.";
+
+          document.getElementById("box-title").innerText = "مهمتنا";
+          document.getElementById("box-desc").innerText = "تم تصميم منصة أمان لتثقيف وحماية مستخدمي الإنترنت ضد التهديدات السيبرانية الحديثة، والتصيد، وتسريب الخصوصية من خلال أدوات بسيطة ومتاحة للجميع.";
+
+          document.getElementById("footer-rights").innerText = "جميع الحقوق محفوظة .AMAN. 2026 ©";
+
+        } else {
+          htmlRoot.setAttribute("dir", "ltr");
+          if(langBtn) langBtn.innerText = "AR | EN";
+
+          document.querySelector(".nav-home").innerText = "Home";
+          document.querySelector(".nav-safety").innerText = "Safety Center";
+          document.querySelector(".nav-checker").innerText = "Line Checker";
+          document.querySelector(".nav-quiz").innerText = "Quiz";
+          document.querySelector(".nav-about").innerText = "About";
+
+          document.getElementById("hero-title").innerText = "About AMAN";
+          document.getElementById("hero-desc").innerText = "Empowering users with digital safety and cyber awareness.";
+
+          document.getElementById("box-title").innerText = "Our Mission";
+          document.getElementById("box-desc").innerText = "AMAN platform is designed to educate and protect internet users against modern cyber threats, phishing, and privacy leaks through simple and accessible tools.";
+
+          document.getElementById("footer-rights").innerText = ".AMAN. All Rights Reserved 2026 ©️";
+        }
+      }
+
+      // تطبيق اللغة فور فتح الصفحة
+      applyLanguage(currentLang);
+
+      // عند الضغط على زر التغيير
+      if(langBtn) {
+        langBtn.addEventListener("click", function () {
+          currentLang = (currentLang === "en") ? "ar" : "en";
+          localStorage.setItem("aman_lang", currentLang);
+          applyLanguage(currentLang);
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMAN | Account Security</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body[dir="rtl"] {
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="desktop-container">
+    
+    <!-- Top Navigation -->
+    <header style="background-color: #F7EBEF; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 0 0 15px 15px;">
+      <ul class="nav-links" style="list-style: none; display: flex; gap: 15px; margin: 0; padding: 0; align-items: center;">
+        <li><a href="index.html" class="nav-home" style="text-decoration: none; color: #333; font-size: 14px;">Home</a></li>
+        <li><a href="safety.html" class="nav-safety" style="text-decoration: none; color: #333; font-size: 14px; font-weight: bold;">Safety Center</a></li>
+        <li><a href="checker.html" class="nav-checker" style="text-decoration: none; color: #333; font-size: 14px;">Line Checker</a></li>
+        <li><a href="quiz.html" class="nav-quiz" style="text-decoration: none; color: #333; font-size: 14px;">Quiz</a></li>
+        <li><a href="about.html" class="nav-about" style="text-decoration: none; color: #333; font-size: 14px;">About</a></li>
+        <li><span id="lang-btn" class="lang-switch" style="background: #D9536E; color: white; padding: 3px 8px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold;">AR | EN</span></li>
+      </ul>
+      <div class="logo" style="font-weight: bold; font-size: 20px; color: #2C1E3B;">AMAN</div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1 id="hero-title">Account Security</h1>
+      <p id="hero-desc">Protect your personal accounts from unauthorized access.</p>
+    </section>
+
+    <!-- Main Content Box -->
+    <div style="background-color: white; border-radius: 16px; padding: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 50px;">
+      <h2 id="box-title" style="color: var(--purple-dark); margin-bottom: 15px;">Securing Your Accounts</h2>
+      <p id="box-desc1" style="color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">Your accounts are the gateway to your personal and professional life. Hackers use credential stuffing and social engineering to break into weak accounts.</p>
+      <p id="box-desc2" style="color: var(--text-muted); line-height: 1.6;">Implementing multi-layered protection makes it nearly impossible for attackers to breach your information.</p>
+    </div>
+
+    <!-- Tips Section -->
+    <div style="background-color: var(--purple-card); border-radius: 16px; padding: 35px; margin-bottom: 50px;">
+      <h2 id="tips-title" style="color: var(--purple-dark); margin-bottom: 20px;">Best Security Practices</h2>
+      <ul style="color: var(--text-muted); line-height: 1.8; padding-left: 20px;">
+        <li id="tip-1">Enable Two-Factor Authentication (2FA) on all major accounts (email, social media, banking).</li>
+        <li id="tip-2">Never reuse passwords across different platforms or websites.</li>
+        <li id="tip-3">Regularly review active login sessions and remove unrecognized devices.</li>
+      </ul>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div style="text-align: center; color: white;">
+        <h2 style="font-size: 24px; margin-bottom: 5px;">AMAN</h2>
+        <p id="footer-rights" style="font-size: 13px; color: #D3C2CF; margin-bottom: 15px;">.AMAN. All Rights Reserved 2026 ©️</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- سكربت الترجمة الثابت والمربوط بذاكرة المتصفح -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const langBtn = document.getElementById("lang-btn");
+      const htmlRoot = document.getElementById("html-root");
+
+      // قراءة اللغة المخزنة في المتصفح تلقائياً
+      let currentLang = localStorage.getItem("aman_lang") || "en";
+
+      function applyLanguage(lang) {
+        if (lang === "ar") {
+          htmlRoot.setAttribute("dir", "rtl");
+          if(langBtn) langBtn.innerText = "EN | AR";
+
+          document.querySelector(".nav-home").innerText = "الرئيسية";
+          document.querySelector(".nav-safety").innerText = "مركز الأمان";
+          document.querySelector(".nav-checker").innerText = "فحص الروابط";
+          document.querySelector(".nav-quiz").innerText = "الاختبار";
+          document.querySelector(".nav-about").innerText = "من نحن";
+
+          document.getElementById("hero-title").innerText = "أمان الحسابات";
+          document.getElementById("hero-desc").innerText = "حماية حساباتك الشخصية من الوصول غير المصرح به.";
+
+          document.getElementById("box-title").innerText = "تأمين حساباتك الرقمية";
+          document.getElementById("box-desc1").innerText = "حساباتك هي البوابة لحياتك الشخصية والمهنية. يستخدم المخترقون حيل الهندسة الاجتماعية لاختراق الحسابات الضعيفة.";
+          document.getElementById("box-desc2").innerText = "تطبيق حماية متعددة الطبقات يجعل من شبه المستحيل على المهاجمين اختراق معلوماتك.";
+
+          document.getElementById("tips-title").innerText = "أفضل ممارسات الأمان";
+          document.getElementById("tip-1").innerText = "فعل المصادقة الثنائية (2FA) على جميع حساباتك الرئيسية (البريد، وسائل التواصل، البنوك).";
+          document.getElementById("tip-2").innerText = "لا تستخدم نفس كلمة المرور أبداً عبر منصات أو مواقع مختلفة.";
+          document.getElementById("tip-3").innerText = "راجع بانتظام جلسات تسجيل الدخول النشطة واحذف الأجهزة غير المعروفة.";
+
+          document.getElementById("footer-rights").innerText = "جميع الحقوق محفوظة .AMAN. 2026 ©";
+
+        } else {
+          htmlRoot.setAttribute("dir", "ltr");
+          if(langBtn) langBtn.innerText = "AR | EN";
+
+          document.querySelector(".nav-home").innerText = "Home";
+          document.querySelector(".nav-safety").innerText = "Safety Center";
+          document.querySelector(".nav-checker").innerText = "Line Checker";
+          document.querySelector(".nav-quiz").innerText = "Quiz";
+          document.querySelector(".nav-about").innerText = "About";
+
+          document.getElementById("hero-title").innerText = "Account Security";
+          document.getElementById("hero-desc").innerText = "Protect your personal accounts from unauthorized access.";
+
+          document.getElementById("box-title").innerText = "Securing Your Accounts";
+          document.getElementById("box-desc1").innerText = "Your accounts are the gateway to your personal and professional life. Hackers use credential stuffing and social engineering to break into weak accounts.";
+          document.getElementById("box-desc2").innerText = "Implementing multi-layered protection makes it nearly impossible for attackers to breach your information.";
+
+          document.getElementById("tips-title").innerText = "Best Security Practices";
+          document.getElementById("tip-1").innerText = "Enable Two-Factor Authentication (2FA) on all major accounts (email, social media, banking).";
+          document.getElementById("tip-2").innerText = "Never reuse passwords across different platforms or websites.";
+          document.getElementById("tip-3").innerText = "Regularly review active login sessions and remove unrecognized devices.";
+
+          document.getElementById("footer-rights").innerText = ".AMAN. All Rights Reserved 2026 ©️";
+        }
+      }
+
+      // تطبيق اللغة فور فتح الصفحة
+      applyLanguage(currentLang);
+
+      // عند الضغط على زر التغيير
+      if(langBtn) {
+        langBtn.addEventListener("click", function () {
+          currentLang = (currentLang === "en") ? "ar" : "en";
+          localStorage.setItem("aman_lang", currentLang);
+          applyLanguage(currentLang);
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

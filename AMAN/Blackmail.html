@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMAN | Blackmail Awareness</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body[dir="rtl"] {
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="desktop-container">
+    
+    <!-- Top Navigation -->
+    <header style="background-color: #F7EBEF; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 0 0 15px 15px;">
+      <ul class="nav-links" style="list-style: none; display: flex; gap: 15px; margin: 0; padding: 0; align-items: center;">
+        <li><a href="index.html" class="nav-home" style="text-decoration: none; color: #333; font-size: 14px;">Home</a></li>
+        <li><a href="safety.html" class="nav-safety" style="text-decoration: none; color: #333; font-size: 14px;">Safety Center</a></li>
+        <li><a href="checker.html" class="nav-checker" style="text-decoration: none; color: #333; font-size: 14px;">Line Checker</a></li>
+        <li><a href="quiz.html" class="nav-quiz" style="text-decoration: none; color: #333; font-size: 14px;">Quiz</a></li>
+        <li><a href="about.html" class="nav-about" style="text-decoration: none; color: #333; font-size: 14px;">About</a></li>
+        <li><span id="lang-btn" class="lang-switch" style="background: #D9536E; color: white; padding: 3px 8px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold;">AR | EN</span></li>
+      </ul>
+      <div class="logo" style="font-weight: bold; font-size: 20px; color: #2C1E3B;">AMAN</div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1 id="hero-title">Blackmail Awareness</h1>
+      <p id="hero-desc">Know how to respond and protect yourself from digital extortion.</p>
+    </section>
+
+    <!-- Main Content Box -->
+    <div style="background-color: white; border-radius: 16px; padding: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 50px;">
+      <h2 id="box-title" style="color: var(--purple-dark); margin-bottom: 15px;">What to Do If You Face Blackmail</h2>
+      <p id="box-desc1" style="color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">Digital blackmail can be frightening, but staying calm and taking the right steps is your best defense. Never give in to demands or pay money.</p>
+      <p id="box-desc2" style="color: var(--text-muted); line-height: 1.6;">Extortionists rarely stop after receiving payment; instead, they often demand more.</p>
+    </div>
+
+    <!-- Steps Section -->
+    <div style="background-color: var(--purple-card); border-radius: 16px; padding: 35px; margin-bottom: 50px;">
+      <h2 id="steps-title" style="color: var(--purple-dark); margin-bottom: 20px;">Immediate Action Steps</h2>
+      <ul style="color: var(--text-muted); line-height: 1.8; padding-left: 20px;">
+        <li id="step-1">Do not pay any money or comply with their demands under any circumstances.</li>
+        <li id="step-2">Save all evidence by taking screenshots of chats, profiles, and links.</li>
+        <li id="step-3">Block the person immediately across all platforms without further communication.</li>
+        <li id="step-4">Inform a trusted adult, family member, or specialized cyber support authorities right away.</li>
+      </ul>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div style="text-align: center; color: white;">
+        <h2 style="font-size: 24px; margin-bottom: 5px;">AMAN</h2>
+        <p id="footer-rights" style="font-size: 13px; color: #D3C2CF; margin-bottom: 15px;">.AMAN. All Rights Reserved 2026 ©️</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- سكربت الترجمة الثابت والمربوط بذاكرة المتصفح -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const langBtn = document.getElementById("lang-btn");
+      const htmlRoot = document.getElementById("html-root");
+
+      // قراءة اللغة المخزنة في المتصفح تلقائياً
+      let currentLang = localStorage.getItem("aman_lang") || "en";
+
+      function applyLanguage(lang) {
+        if (lang === "ar") {
+          htmlRoot.setAttribute("dir", "rtl");
+          if(langBtn) langBtn.innerText = "EN | AR";
+
+          document.querySelector(".nav-home").innerText = "الرئيسية";
+          document.querySelector(".nav-safety").innerText = "مركز الأمان";
+          document.querySelector(".nav-checker").innerText = "فحص الروابط";
+          document.querySelector(".nav-quiz").innerText = "الاختبار";
+          document.querySelector(".nav-about").innerText = "من نحن";
+
+          document.getElementById("hero-title").innerText = "التوعية ضد الابتزاز";
+          document.getElementById("hero-desc").innerText = "تعرف على طريقة التصرف السليم وحماية نفسك من الابتزاز الرقمي.";
+
+          document.getElementById("box-title").innerText = "ماذا تفعل إذا واجهت ابتزازاً؟";
+          document.getElementById("box-desc1").innerText = "قد يكون الابتزاز الرقمي مخيفاً، لكن الحفاظ على هدوئك واتخاذ الخطوات الصحيحة هو أفضل دفاع لك. لا تستسلم للمطالب أو تدفع الأموال أبداً.";
+          document.getElementById("box-desc2").innerText = "المبتزون نادراً ما يتوقفون بعد استلام الأموال؛ وغالباً ما يطلبون المزيد.";
+
+          document.getElementById("steps-title").innerText = "خطوات التصرف الفوري";
+          document.getElementById("step-1").innerText = "لا تدفع أي أموال أو ترضخ لمطالبهم تحت أي ظرف من الظروف.";
+          document.getElementById("step-2").innerText = "احفظ جميع الأدلة من خلال التقاط صور الشاشة للمحادثات، الحسابات، والروابط.";
+          document.getElementById("step-3").innerText = "احظر الشخص فوراً عبر جميع المنصات دون إجراء أي محادثة إضافية.";
+          document.getElementById("step-4").innerText = "أبلغ شخصاً بالغاً موثوقاً، فرداً من العائلة، أو جهات الدعم السيبراني المختصة فوراً.";
+
+          document.getElementById("footer-rights").innerText = "جميع الحقوق محفوظة .AMAN. 2026 ©";
+
+        } else {
+          htmlRoot.setAttribute("dir", "ltr");
+          if(langBtn) langBtn.innerText = "AR | EN";
+
+          document.querySelector(".nav-home").innerText = "Home";
+          document.querySelector(".nav-safety").innerText = "Safety Center";
+          document.querySelector(".nav-checker").innerText = "Line Checker";
+          document.querySelector(".nav-quiz").innerText = "Quiz";
+          document.querySelector(".nav-about").innerText = "About";
+
+          document.getElementById("hero-title").innerText = "Blackmail Awareness";
+          document.getElementById("hero-desc").innerText = "Know how to respond and protect yourself from digital extortion.";
+
+          document.getElementById("box-title").innerText = "What to Do If You Face Blackmail";
+          document.getElementById("box-desc1").innerText = "Digital blackmail can be frightening, but staying calm and taking the right steps is your best defense. Never give in to demands or pay money.";
+          document.getElementById("box-desc2").innerText = "Extortionists rarely stop after receiving payment; instead, they often demand more.";
+
+          document.getElementById("steps-title").innerText = "Immediate Action Steps";
+          document.getElementById("step-1").innerText = "Do not pay any money or comply with their demands under any circumstances.";
+          document.getElementById("step-2").innerText = "Save all evidence by taking screenshots of chats, profiles, and links.";
+          document.getElementById("step-3").innerText = "Block the person immediately across all platforms without further communication.";
+          document.getElementById("step-4").innerText = "Inform a trusted adult, family member, or specialized cyber support authorities right away.";
+
+          document.getElementById("footer-rights").innerText = ".AMAN. All Rights Reserved 2026 ©️";
+        }
+      }
+
+      // تطبيق اللغة فور فتح الصفحة
+      applyLanguage(currentLang);
+
+      // عند الضغط على زر التغيير
+      if(langBtn) {
+        langBtn.addEventListener("click", function () {
+          currentLang = (currentLang === "en") ? "ar" : "en";
+          localStorage.setItem("aman_lang", currentLang);
+          applyLanguage(currentLang);
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
